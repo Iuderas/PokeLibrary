@@ -12,7 +12,7 @@ export const Pokedex: React.FC = () => {
   >();
   const [pokemonDetails, setPokemonDetails] = useState<any | undefined>();
 
-  console.log({ pokemonDetails });
+  console.log({});
 
   useEffect(() => {
     getPokemons().then((response) => {
