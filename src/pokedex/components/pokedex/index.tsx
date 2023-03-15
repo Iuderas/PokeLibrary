@@ -5,51 +5,28 @@ import { IPokemon } from "../../hooks/getPokemons/interfaces";
 
 import * as Styled from "./styles";
 import { usePokeClient } from "../../../clients/PokeNode";
+import { NamedAPIResource } from "pokenode-ts";
 
 export const Pokedex: React.FC = () => {
-  const [pokemons, setPokemons] = useState<any>();
+  const [pokemons, setPokemons] = useState<NamedAPIResource[]>();
   const [selectedPokemon, setSelectedPokemon] = useState<
-    IPokemon | undefined
+    NamedAPIResource | undefined
   >();
   const [pokemonDetails, setPokemonDetails] = useState<any | undefined>();
-  const { getPokemonList, getPokemonsDetails, getPokemonInfo } =
-    usePokemonsInfo();
-
-  const getNextPageFromList = () => {
-    (async () =>
-      await getPokemonList(151)
-        .then((response) => {
-          setPokemons(response?.next);
-          console.log(response);
-        })
-        .catch((error) => {}))();
-  };
+  const { getPokemons, getPokemonsDetails } = usePokemonsInfo();
 
   useEffect(() => {
-    (async () =>
-      await getPokemonList()
-        .then((response) => {
-          setPokemons(response);
-          console.log(response);
-        })
-        .catch((error) => {}))();
+    getPokemons({ limit: 151, offset: 0 }).then((response) => {
+      setPokemons(response.results);
+    });
   }, []);
-
-  // useEffect(() => {
-  //   getPokemons().then((response) => {
-  //     setPokemons(response.results);
-  //   });
-  // }, []);
 
   useEffect(() => {
     if (!selectedPokemon) return;
 
-    (async () =>
-      await getPokemonInfo(selectedPokemon.name)
-        .then((response) => {
-          setPokemonDetails(response);
-        })
-        .catch((error) => {}))();
+    getPokemonsDetails(selectedPokemon.name).then((response) => {
+      setPokemonDetails(response);
+    });
   }, [selectedPokemon]);
 
   return (
@@ -58,18 +35,16 @@ export const Pokedex: React.FC = () => {
 
       <Styled.Container>
         {pokemons &&
-          pokemons?.results?.map((pokemon: IPokemon) => (
+          pokemons.map((pokemon) => (
             <Styled.Button
               key={pokemon.url}
-              onClick={() => setSelectedPokemon(pokemon)}
+              onClick={() => {
+                setSelectedPokemon(pokemon);
+              }}
             >
               {pokemon.name}
             </Styled.Button>
           ))}
-
-        <Styled.Button onClick={() => getNextPageFromList()}>
-          Next page
-        </Styled.Button>
       </Styled.Container>
 
       <Styled.Label>
@@ -83,8 +58,7 @@ export const Pokedex: React.FC = () => {
           <PokemonCard
             onClick={() => {}}
             selectedPokemonDetails={pokemonDetails}
-            selectedPokemon={selectedPokemon}
-          ></PokemonCard>
+          />
         </Styled.Container>
       )}
     </div>

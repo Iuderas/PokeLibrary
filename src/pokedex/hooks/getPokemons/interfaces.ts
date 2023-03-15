@@ -1,8 +1,6 @@
-export interface IPokemonList {
-  count: number;
-  next: null | string;
-  previous: null | string;
-  results: IPokemon[];
+export interface IGetPokemons {
+  limit: number;
+  offset: number;
 }
 
 export interface IPokemon {

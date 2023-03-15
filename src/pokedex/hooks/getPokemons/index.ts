@@ -2,18 +2,21 @@ import axios from "axios";
 import * as I from "./interfaces";
 import { usePokeClient } from "../../../clients/PokeNode";
 import { useCallback } from "react";
-import { Pokemon } from "pokenode-ts";
+import { NamedAPIResourceList, Pokemon } from "pokenode-ts";
 
 export const usePokemonsInfo = () => {
-  const getPokemons = async (): Promise<I.IPokemonList> => {
-    const endpoint = `${process.env.REACT_APP_POKE_API}/pokemon?limit=151&offset=0`;
+  const getPokemons = async ({
+    limit,
+    offset,
+  }: I.IGetPokemons): Promise<NamedAPIResourceList> => {
+    const endpoint = `${process.env.REACT_APP_POKE_API}/pokemon?limit=${limit}&offset=${offset}`;
 
-    const result = await axios.get<I.IPokemonList>(endpoint);
+    const result = await axios.get<NamedAPIResourceList>(endpoint);
 
     return result.data;
   };
 
-  const getPokemonsDetails = async (name: string) => {
+  const getPokemonsDetails = async (name: string): Promise<Pokemon> => {
     const endpoint = `${process.env.REACT_APP_POKE_API}/pokemon/${name}`;
 
     const result = await axios.get<any>(endpoint);
@@ -21,23 +24,23 @@ export const usePokemonsInfo = () => {
     return result.data;
   };
 
-  const getPokemonList = useCallback((list?: number) => {
-    const data = usePokeClient
-      .listPokemons(list)
-      .then((response) => response)
-      .catch((error) => console.log(error));
+  // const getPokemonList = useCallback((list?: number, offset?: number) => {
+  //   const data = usePokeClient
+  //     .listPokemons(list, offset)
+  //     .then((response) => response)
+  //     .catch((error) => console.log(error));
 
-    return data;
-  }, []);
+  //   return data;
+  // }, []);
 
-  const getPokemonInfo = useCallback((name: string) => {
-    const data = usePokeClient
-      .getPokemonByName(name)
-      .then((response) => response)
-      .catch((error) => console.log(error));
+  // const getPokemonInfo = useCallback((name: string) => {
+  //   const data = usePokeClient
+  //     .getPokemonByName(name)
+  //     .then((response) => response)
+  //     .catch((error) => console.log(error));
 
-    return data;
-  }, []);
+  //   return data;
+  // }, []);
 
-  return { getPokemonList, getPokemonsDetails, getPokemonInfo };
+  return { getPokemons, getPokemonsDetails };
 };
