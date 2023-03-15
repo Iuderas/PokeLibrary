@@ -1,3 +1,4 @@
+import { Pokemon } from "pokenode-ts";
 import { IPokemon } from "../../hooks/getPokemons/interfaces";
 
 export type TSprite = {
@@ -10,15 +11,8 @@ export type TSprite = {
   front_female?: string;
   front_shiny_female?: string;
 };
-
-export interface IDetails {
-  id: number;
-  name: string;
-  sprite: TSprite;
-}
-
 export interface IPokemonCard {
   onClick: () => void;
-  selectedPokemonDetails: IDetails;
+  selectedPokemonDetails: Pokemon;
   selectedPokemon?: IPokemon;
 }

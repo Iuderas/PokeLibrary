@@ -1,66 +1,91 @@
 import React, { useState, useEffect } from "react";
 import { PokemonCard } from "../PokemonCard";
-import { getPokemons, getPokemonsDetails } from "../../hooks/getPokemons";
+import { usePokemonsInfo } from "../../hooks/getPokemons";
 import { IPokemon } from "../../hooks/getPokemons/interfaces";
 
 import * as Styled from "./styles";
+import { usePokeClient } from "../../../clients/PokeNode";
 
 export const Pokedex: React.FC = () => {
-  const [pokemons, setPokemons] = useState<IPokemon[]>([]);
+  const [pokemons, setPokemons] = useState<any>();
   const [selectedPokemon, setSelectedPokemon] = useState<
     IPokemon | undefined
   >();
   const [pokemonDetails, setPokemonDetails] = useState<any | undefined>();
+  const { getPokemonList, getPokemonsDetails, getPokemonInfo } =
+    usePokemonsInfo();
 
-  console.log({});
+  const getNextPageFromList = () => {
+    (async () =>
+      await getPokemonList(151)
+        .then((response) => {
+          setPokemons(response?.next);
+          console.log(response);
+        })
+        .catch((error) => {}))();
+  };
 
   useEffect(() => {
-    getPokemons().then((response) => {
-      setPokemons(response.results);
-    });
+    (async () =>
+      await getPokemonList()
+        .then((response) => {
+          setPokemons(response);
+          console.log(response);
+        })
+        .catch((error) => {}))();
   }, []);
+
+  // useEffect(() => {
+  //   getPokemons().then((response) => {
+  //     setPokemons(response.results);
+  //   });
+  // }, []);
 
   useEffect(() => {
     if (!selectedPokemon) return;
 
-    getPokemonsDetails(selectedPokemon.name).then((response) => {
-      setPokemonDetails(response);
-    });
+    (async () =>
+      await getPokemonInfo(selectedPokemon.name)
+        .then((response) => {
+          setPokemonDetails(response);
+        })
+        .catch((error) => {}))();
   }, [selectedPokemon]);
 
   return (
     <div>
       <h1>Pokédex</h1>
 
-      <h2>
-        <Styled.Container>
-          {pokemons.map((pokemon: IPokemon) => (
+      <Styled.Container>
+        {pokemons &&
+          pokemons?.results?.map((pokemon: IPokemon) => (
             <Styled.Button
               key={pokemon.url}
               onClick={() => setSelectedPokemon(pokemon)}
             >
               {pokemon.name}
-
-              <Styled.Label key={pokemon.url}></Styled.Label>
             </Styled.Button>
-            // <PokemonCard
-            //   onClick={() => setSelectedPokemon(pokemon)}
-            //   selectedPokemonDetails={pokemonDetails}
-            //   selectedPokemon={selectedPokemon}
-            // ></PokemonCard>
           ))}
-        </Styled.Container>
-      </h2>
 
-      <h2>
+        <Styled.Button onClick={() => getNextPageFromList()}>
+          Next page
+        </Styled.Button>
+      </Styled.Container>
+
+      <Styled.Label>
         Pokemon Selecionado:{" "}
         {selectedPokemon?.name || "nenhum pokemon selecionado"}
-      </h2>
+      </Styled.Label>
 
       {selectedPokemon && (
-        <h3>
-          Detalhes do pokemon selecionado: {JSON.stringify(pokemonDetails)}
-        </h3>
+        <Styled.Container>
+          <h3>Detalhes do pokemon selecionado:</h3>
+          <PokemonCard
+            onClick={() => {}}
+            selectedPokemonDetails={pokemonDetails}
+            selectedPokemon={selectedPokemon}
+          ></PokemonCard>
+        </Styled.Container>
       )}
     </div>
   );

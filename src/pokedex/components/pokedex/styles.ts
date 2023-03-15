@@ -18,6 +18,8 @@ export const Button = styled.button`
   }
 `;
 
-export const Label = styled.label`
-  background-color: lightblue;
+export const Label = styled.span`
+  font-size: large;
+  font-weight: bold;
+  text-transform: initial;
 `;
