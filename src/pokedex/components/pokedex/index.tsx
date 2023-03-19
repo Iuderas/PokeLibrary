@@ -1,18 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { PokemonCard } from "../PokemonCard";
 import { usePokemonsInfo } from "../../hooks/getPokemons";
-import { IPokemon } from "../../hooks/getPokemons/interfaces";
 
 import * as Styled from "./styles";
-import { usePokeClient } from "../../../clients/PokeNode";
-import { NamedAPIResource } from "pokenode-ts";
+import { NamedAPIResource, Pokemon } from "pokenode-ts";
 
 export const Pokedex: React.FC = () => {
   const [pokemons, setPokemons] = useState<NamedAPIResource[]>();
-  const [selectedPokemon, setSelectedPokemon] = useState<
-    NamedAPIResource | undefined
-  >();
-  const [pokemonDetails, setPokemonDetails] = useState<any | undefined>();
+  const [selectedPokemon, setSelectedPokemon] = useState<NamedAPIResource>();
+  const [pokemonDetails, setPokemonDetails] = useState<Pokemon>();
+
   const { getPokemons, getPokemonsDetails } = usePokemonsInfo();
 
   useEffect(() => {
@@ -30,10 +27,9 @@ export const Pokedex: React.FC = () => {
   }, [selectedPokemon]);
 
   return (
-    <div>
-      <h1>Pokédex</h1>
-
-      <Styled.Container>
+    <Styled.Container>
+      <Styled.Header>Pokédex</Styled.Header>
+      <Styled.PokemonGrid>
         {pokemons &&
           pokemons.map((pokemon) => (
             <Styled.Button
@@ -45,22 +41,23 @@ export const Pokedex: React.FC = () => {
               {pokemon.name}
             </Styled.Button>
           ))}
-      </Styled.Container>
-
+      </Styled.PokemonGrid>
       <Styled.Label>
         Pokemon Selecionado:{" "}
         {selectedPokemon?.name || "nenhum pokemon selecionado"}
       </Styled.Label>
 
-      {selectedPokemon && (
-        <Styled.Container>
-          <h3>Detalhes do pokemon selecionado:</h3>
+      {selectedPokemon && pokemonDetails && (
+        <Styled.PokemonContainer>
           <PokemonCard
             onClick={() => {}}
-            selectedPokemonDetails={pokemonDetails}
+            name={pokemonDetails.name}
+            img={pokemonDetails.sprites.front_default as string}
+            id={pokemonDetails.id}
+            type={pokemonDetails.types[0].type.name}
           />
-        </Styled.Container>
+        </Styled.PokemonContainer>
       )}
-    </div>
+    </Styled.Container>
   );
 };

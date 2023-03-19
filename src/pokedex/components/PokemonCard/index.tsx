@@ -4,16 +4,17 @@ import * as Styled from "./styles";
 
 export const PokemonCard: React.FC<IPokemonCard> = ({
   onClick,
-  selectedPokemonDetails,
+  img,
+  id,
+  name,
+  type,
 }) => {
   return (
     <Styled.Wrapper>
       <Styled.Container>
         {/* <Styled.Button onClick={onClick} /> */}
-        <Styled.Sprite
-          src={selectedPokemonDetails?.sprites?.front_default as string}
-        />
-        <Styled.Label>{selectedPokemonDetails?.name}</Styled.Label>
+        <Styled.Sprite src={img} />
+        <Styled.Label>{name}</Styled.Label>
       </Styled.Container>
     </Styled.Wrapper>
   );

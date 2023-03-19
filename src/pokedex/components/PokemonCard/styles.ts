@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const Wrapper = styled.div`
-  position: absolute;
   width: 136px;
   height: 136px;
   :hover {

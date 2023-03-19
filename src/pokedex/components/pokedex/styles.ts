@@ -1,7 +1,30 @@
 import styled from "styled-components";
+import theme from "../../../theme";
 
 export const Container = styled.div`
-  /* overflow-y: scroll; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+export const Header = styled.h1`
+  margin: 0;
+  font-size: 50px;
+  font-family: monospace;
+  font-weight: bolder;
+`;
+
+export const PokemonGrid = styled.div`
+  width: 100%;
+  max-height: auto;
+  display: flexbox;
+`;
+
+export const PokemonContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  align-items: center;
 `;
 
 export const Button = styled.button`
