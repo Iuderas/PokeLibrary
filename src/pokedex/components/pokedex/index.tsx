@@ -19,7 +19,7 @@ export const Pokedex: React.FC = () => {
     getPokemons({ limit: 151, offset: 0 }).then((response) => {
       setPokemons(response.results);
     });
-  }, []);
+  }, [getPokemons]);
 
   useEffect(() => {
     if (!selectedPokemon) return;
@@ -27,12 +27,10 @@ export const Pokedex: React.FC = () => {
     getPokemonsDetails(selectedPokemon.name).then((response) => {
       setPokemonDetails(response);
     });
-  }, [selectedPokemon]);
+  }, [selectedPokemon, getPokemonsDetails]);
 
   return (
     <div>
-      <h1>Pokédex</h1>
-
       <Styled.Container>
         {pokemons &&
           pokemons.map((pokemon) => (
@@ -47,20 +45,19 @@ export const Pokedex: React.FC = () => {
           ))}
       </Styled.Container>
 
-      <Styled.Label>
-        Pokemon Selecionado:{" "}
-        {selectedPokemon?.name || "nenhum pokemon selecionado"}
-      </Styled.Label>
-
-      {selectedPokemon && (
-        <Styled.Container>
-          <h3>Detalhes do pokemon selecionado:</h3>
-          <PokemonCard
-            onClick={() => {}}
+      {/* {selectedPokemon && (
+        <Styled.CardContainer>
+          <Styled.Label>
+            Pokemon Selecionado:{" "}
+            {selectedPokemon?.name || "nenhum pokemon selecionado"}
+          </Styled.Label> */}
+      {/* <h3>Detalhes do pokemon selecionado:</h3> */}
+      {/* <PokemonCard
+            // onClick={() => {}}
             selectedPokemonDetails={pokemonDetails}
           />
-        </Styled.Container>
-      )}
+        </Styled.CardContainer>
+      )} */}
     </div>
   );
 };

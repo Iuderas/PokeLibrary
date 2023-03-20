@@ -12,7 +12,7 @@ export type TSprite = {
   front_shiny_female?: string;
 };
 export interface IPokemonCard {
-  onClick: () => void;
+  // onClick: () => void;
   selectedPokemonDetails: Pokemon;
   selectedPokemon?: IPokemon;
 }

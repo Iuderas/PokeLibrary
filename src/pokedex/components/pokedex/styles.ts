@@ -1,21 +1,40 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  /* overflow-y: scroll; */
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+
+  border: 2px solid;
+  border-radius: 10px;
+  border-color: #000;
+  background-color: #e40707;
 `;
 
 export const Button = styled.button`
-  /* width: 100%; */
+  width: 200px;
   height: 100%;
-  margin: 5px;
+  margin: 10px;
   padding: 10px;
-  border-radius: 10px;
+  border-radius: 15px;
   font-weight: bold;
+  color: #fff;
+  background-color: #c20202;
 
   :hover {
-    background-color: rgba(0, 255, 0, 0.2);
+    transform: scale(1.2);
+    transition: linear;
     cursor: pointer;
   }
+
+  :nth-child(2n + 1) {
+    clear: left;
+  }
+`;
+
+export const CardContainer = styled.div`
+  width: 100%;
+  background-color: #dad;
 `;
 
 export const Label = styled.span`

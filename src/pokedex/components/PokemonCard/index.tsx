@@ -3,7 +3,7 @@ import { IPokemonCard } from "./interfaces";
 import * as Styled from "./styles";
 
 export const PokemonCard: React.FC<IPokemonCard> = ({
-  onClick,
+  // onClick,
   selectedPokemonDetails,
 }) => {
   return (
@@ -12,8 +12,11 @@ export const PokemonCard: React.FC<IPokemonCard> = ({
         {/* <Styled.Button onClick={onClick} /> */}
         <Styled.Sprite
           src={selectedPokemonDetails?.sprites?.front_default as string}
+          alt="pokémon-sprite"
         />
-        <Styled.Label>{selectedPokemonDetails?.name}</Styled.Label>
+        <Styled.Label>
+          {selectedPokemonDetails?.name} #{selectedPokemonDetails?.id}
+        </Styled.Label>
       </Styled.Container>
     </Styled.Wrapper>
   );
