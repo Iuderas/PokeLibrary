@@ -4,4 +4,5 @@ export interface IPokemonCard {
   name: string;
   img: string;
   type: string;
+  moves: string;
 }

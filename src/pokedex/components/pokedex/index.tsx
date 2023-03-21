@@ -55,6 +55,7 @@ export const Pokedex: React.FC = () => {
             img={pokemonDetails.sprites.front_default as string}
             id={pokemonDetails.id}
             type={pokemonDetails.types[0].type.name}
+            moves={pokemonDetails.moves[0].move.name}
           />
         </Styled.PokemonContainer>
       )}
