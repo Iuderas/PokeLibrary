@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import theme from "../../../theme";
 
 export const Container = styled.div`
   display: flex;
@@ -28,7 +27,6 @@ export const PokemonContainer = styled.div`
 `;
 
 export const Button = styled.button`
-  /* width: 100%; */
   height: 100%;
   margin: 5px;
   padding: 10px;
@@ -36,7 +34,7 @@ export const Button = styled.button`
   font-weight: bold;
 
   :hover {
-    background-color: rgba(0, 255, 0, 0.2);
+    background-color: #fd065a;
     cursor: pointer;
   }
 `;
@@ -44,5 +42,5 @@ export const Button = styled.button`
 export const Label = styled.span`
   font-size: large;
   font-weight: bold;
-  text-transform: initial;
+  text-transform: capitalize;
 `;

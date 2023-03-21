@@ -5,7 +5,7 @@ import { usePokemonsInfo } from "../../hooks/getPokemons";
 
 import { PokemonCard } from "../PokemonCard";
 import { IPokemonList } from "./interfaces";
-import * as S from "./styles";
+import * as Styled from "./styles";
 
 export const PokemonList: FC<IPokemonList> = ({ data, onClick }) => {
   const { getPokemonsDetails } = usePokemonsInfo();
@@ -22,16 +22,17 @@ export const PokemonList: FC<IPokemonList> = ({ data, onClick }) => {
         name={item.name}
         img={item.sprites.front_default as string}
         type={item.types[0].type.name}
+        moves={item.moves[0].move.name}
         onClick={onClick}
       ></PokemonCard>
     );
   };
 
   return (
-    <S.GridList>
+    <Styled.GridList>
       {pokemonDetailsList.map((item, index) =>
         renderItem(item as unknown as Pokemon, index)
       )}
-    </S.GridList>
+    </Styled.GridList>
   );
 };

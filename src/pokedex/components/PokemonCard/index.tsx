@@ -8,13 +8,15 @@ export const PokemonCard: React.FC<IPokemonCard> = ({
   id,
   name,
   type,
+  moves,
 }) => {
   return (
     <Styled.Wrapper>
       <Styled.Container>
         {/* <Styled.Button onClick={onClick} /> */}
-        <Styled.Sprite src={img} />
-        <Styled.Label>{name}</Styled.Label>
+        <Styled.Sprite src={img} alt="pokemon-display" />
+        <Styled.Label>{type}</Styled.Label>
+        <Styled.Label>{moves}</Styled.Label>
       </Styled.Container>
     </Styled.Wrapper>
   );
