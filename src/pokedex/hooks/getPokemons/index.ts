@@ -2,7 +2,7 @@ import axios from "axios";
 import * as I from "./interfaces";
 import { usePokeClient } from "../../../clients/PokeNode";
 import { useCallback } from "react";
-import { NamedAPIResourceList, Pokemon } from "pokenode-ts";
+import { NamedAPIResourceList, Pokemon, Types } from "pokenode-ts";
 
 export const usePokemonsInfo = () => {
   const getPokemons = async ({
@@ -23,6 +23,14 @@ export const usePokemonsInfo = () => {
 
     return result.data;
   };
+
+  // const getPokemonsWeakness = async (name: string): Promise<Types> => {
+  //   const endpoint = `${process.env.REACT_APP_POKE_API}/type/${name}`;
+
+  //   const result = await axios.get<any>(endpoint);
+
+  //   return result.data;
+  // };
 
   // const getPokemonList = useCallback((list?: number, offset?: number) => {
   //   const data = usePokeClient
