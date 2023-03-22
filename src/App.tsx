@@ -1,5 +1,5 @@
 import React from "react";
-import { Pokedex } from "./pokedex/components/Pokedex";
+import { Pokedex } from "./components/pokedex";
 
 export const App: React.FC = () => {
   return (

@@ -3,6 +3,11 @@ export interface IGetPokemons {
   offset: number;
 }
 
+export interface IGetPokemonsDetails {
+  name?: string;
+  url?: string;
+}
+
 export interface IPokemon {
   name: string;
   url: string;

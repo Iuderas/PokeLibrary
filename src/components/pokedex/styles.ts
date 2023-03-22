@@ -16,7 +16,9 @@ export const Header = styled.h1`
 export const PokemonGrid = styled.div`
   width: 100%;
   max-height: auto;
-  display: flexbox;
+  display: grid;
+  grid: 140px / 140px 140px 140px 140px 140px 140px;
+  grid-gap: 50px;
 `;
 
 export const PokemonContainer = styled.div`
@@ -27,6 +29,7 @@ export const PokemonContainer = styled.div`
 `;
 
 export const Button = styled.button`
+  /* width: 100%; */
   height: 100%;
   margin: 5px;
   padding: 10px;
@@ -34,7 +37,7 @@ export const Button = styled.button`
   font-weight: bold;
 
   :hover {
-    background-color: #fd065a;
+    background-color: rgba(0, 255, 0, 0.2);
     cursor: pointer;
   }
 `;
@@ -42,5 +45,5 @@ export const Button = styled.button`
 export const Label = styled.span`
   font-size: large;
   font-weight: bold;
-  text-transform: capitalize;
+  text-transform: initial;
 `;
