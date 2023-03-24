@@ -4,7 +4,7 @@ import { Pokedex } from "./components/pokedex";
 export const App: React.FC = () => {
   return (
     <>
-      <Pokedex></Pokedex>
+      <Pokedex />
     </>
   );
 };

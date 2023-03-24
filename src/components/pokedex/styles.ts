@@ -4,21 +4,30 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  font-family: monospace;
+
+  background-color: #b70303;
+
+  margin: 0;
 `;
 
 export const Header = styled.h1`
   margin: 0;
   font-size: 50px;
-  font-family: monospace;
+
   font-weight: bolder;
 `;
 
 export const PokemonGrid = styled.div`
   width: 100%;
-  max-height: auto;
-  display: grid;
-  grid: 140px / 140px 140px 140px 140px 140px 140px;
-  grid-gap: 50px;
+  height: 100%;
+  display: flex;
+
+  flex-wrap: wrap;
+  gap: 10px;
+
+  justify-content: space-evenly;
 `;
 
 export const PokemonContainer = styled.div`

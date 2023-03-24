@@ -6,27 +6,28 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
   width: 136px;
-  height: 136px;
+  height: 100%;
 
-  /* border-color: ${(props) => props.theme.colors.fire}; */
-  border-color: #000000;
-  border: 3px;
+  border-radius: 10px;
 
-  background-color: #e40707;
+  background-color: #f10202;
 
   z-index: 1;
 `;
 
 export const Button = styled.button`
-  display: none;
+  display: flex;
   position: absolute;
 
   width: 100%;
   height: 100%;
+  padding: 0;
 
-  border-radius: 10px;
+  border: none;
 
   font-weight: bold;
+
+  background-color: transparent;
 
   z-index: 3;
 
@@ -46,10 +47,12 @@ export const Label = styled.label`
   display: flex;
 
   padding: 5px;
-  margin: 2px;
+  margin: 0 0 10px;
 
-  border: 2px solid #d81f00;
+  border: 2px solid #ff2d2d;
   border-radius: 10px;
+
+  background-color: #ff2d2d;
 
   z-index: 1;
 `;
