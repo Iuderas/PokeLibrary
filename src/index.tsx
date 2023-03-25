@@ -4,6 +4,7 @@ import { ThemeProvider } from "styled-components";
 import { App } from "./App";
 import reportWebVitals from "./reportWebVitals";
 import theme from "./theme";
+import "./styles.css";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
