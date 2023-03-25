@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { PokemonCard } from "../PokemonCard";
-import { ArrowButton } from "../NextButton";
+import { ArrowButton } from "../ArrowButton";
 import { usePokemonsInfo } from "../../hooks/getPokemons";
 
 import * as Styled from "./styles";
