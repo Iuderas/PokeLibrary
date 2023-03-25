@@ -37,6 +37,7 @@ export const Button = styled.button`
 `;
 
 export const Sprite = styled.img`
+  margin: 30px 0 0;
   width: 100%;
   height: 100%;
   z-index: 1;
@@ -55,4 +56,14 @@ export const Label = styled.label`
   background-color: #ff2d2d;
 
   z-index: 1;
+`;
+
+export const IdLabel = styled(Label)`
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  margin: 10px;
+
+  z-index: 2;
 `;
