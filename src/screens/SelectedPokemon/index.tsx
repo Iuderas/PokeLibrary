@@ -21,12 +21,16 @@ export const SelectedPokemon: React.FC = () => {
         </Styled.WrapperImage>
         <Styled.Label>{currentPokemon?.name}</Styled.Label>
 
-        <Styled.DescriptionWrapper>
+        <Styled.ButtonWrapper>
           <Styled.Button>types</Styled.Button>
           <Styled.Button>moves</Styled.Button>
           <Styled.Button>evolution</Styled.Button>
           <Styled.Button>weakness</Styled.Button>
           <Styled.Button>resistances</Styled.Button>
+        </Styled.ButtonWrapper>
+
+        <Styled.DescriptionWrapper>
+          <Styled.Description></Styled.Description>
         </Styled.DescriptionWrapper>
       </Styled.Container>
     </Styled.Wrapper>

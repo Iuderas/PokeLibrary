@@ -35,6 +35,7 @@ export const Button = styled.button`
   border-radius: 10px;
 
   background-color: #ff3333;
+
   :hover {
     cursor: pointer;
     background-color: #dad;
@@ -57,7 +58,7 @@ export const WrapperImage = styled.div`
   margin-bottom: 30px;
 `;
 
-export const DescriptionWrapper = styled.div`
+export const ButtonWrapper = styled.div`
   display: flex;
 
   flex-wrap: wrap;
@@ -66,6 +67,22 @@ export const DescriptionWrapper = styled.div`
   padding: 0 20px;
 
   justify-content: center;
+`;
+
+export const DescriptionWrapper = styled.div`
+  display: flex;
+
+  flex-wrap: wrap;
+  justify-content: center;
+`;
+
+export const Description = styled.div`
+  width: 100%;
+  height: auto;
+
+  border-radius: 20px;
+  margin: 30px;
+  padding: 10px;
 `;
 
 export const Sprite = styled.img`
