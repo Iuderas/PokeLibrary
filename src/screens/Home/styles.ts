@@ -1,28 +1,11 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  font-family: monospace;
-
-  background-color: #b70303;
-
-  margin: 0;
-`;
+export const Container = styled.div``;
 
 export const ContentWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-`;
-
-export const Header = styled.h1`
-  margin: 0;
-  font-size: 50px;
-
-  font-weight: bolder;
 `;
 
 export const PokemonGrid = styled.div`

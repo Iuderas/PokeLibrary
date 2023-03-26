@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { PokemonCard } from "../PokemonCard";
-import { ArrowButton } from "../ArrowButton";
+import { PokemonCard } from "../../components/PokemonCard";
+import { ArrowButton } from "../../components/ArrowButton";
 import { usePokemonsInfo } from "../../hooks/getPokemons";
+import { useNavigate } from "react-router-dom";
 
 import * as Styled from "./styles";
 import { NamedAPIResource } from "pokenode-ts";
@@ -11,8 +12,8 @@ export const Pokedex: React.FC = () => {
   const [offset, setOffset] = useState<number>(0);
   const [limit, setLimit] = useState<number>(18);
 
-  const { getPokemonDetails, fetchPokemons, currentPokemon, pokemonList } =
-    usePokemonsInfo();
+  const navigate = useNavigate();
+  const { getPokemonDetails, fetchPokemons, pokemonList } = usePokemonsInfo();
 
   const handleNextButton = () => {
     if (offset === 126) setLimit(7);
@@ -29,6 +30,8 @@ export const Pokedex: React.FC = () => {
   useEffect(() => {
     fetchPokemons({ limit: limit, offset: offset });
 
+    console.log(offset);
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [offset]);
 
@@ -38,7 +41,6 @@ export const Pokedex: React.FC = () => {
 
   return (
     <Styled.Container>
-      <Styled.Header>Pokédex</Styled.Header>
       <Styled.ContentWrapper>
         <ArrowButton
           onClick={() => handlePrevButton()}
@@ -54,10 +56,9 @@ export const Pokedex: React.FC = () => {
               return (
                 <PokemonCard
                   key={index}
-                  name={pokemon.name}
                   url={pokemon.url}
                   onClick={() => {
-                    getPokemonDetails({ name: pokemon.name });
+                    navigate(`pokemon/${pokemon.name}`);
                   }}
                 />
               );
@@ -72,23 +73,6 @@ export const Pokedex: React.FC = () => {
           buttonSize={40}
         />
       </Styled.ContentWrapper>
-      <Styled.Label>
-        Pokemon Selecionado:{" "}
-        {currentPokemon?.name || "nenhum pokemon selecionado"}
-      </Styled.Label>
-
-      {currentPokemon && (
-        <Styled.PokemonContainer>
-          <PokemonCard
-            onClick={() => {}}
-            name={currentPokemon.name}
-            img={currentPokemon.sprites.front_default as string}
-            id={currentPokemon.id}
-            type={currentPokemon.types[0].type.name}
-            moves={currentPokemon.moves[0].move.name}
-          />
-        </Styled.PokemonContainer>
-      )}
     </Styled.Container>
   );
 };

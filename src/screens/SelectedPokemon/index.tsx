@@ -1,12 +1,16 @@
 import React, { useEffect } from "react";
+
+import { useParams } from "react-router-dom";
 import { usePokemonsInfo } from "../../hooks/getPokemons";
+
 import * as Styled from "./styles";
 
 export const SelectedPokemon: React.FC = () => {
   const { getPokemonDetails, currentPokemon } = usePokemonsInfo();
+  const { name } = useParams();
 
   useEffect(() => {
-    getPokemonDetails({ url: "https://pokeapi.co/api/v2/pokemon/articuno" });
+    getPokemonDetails({ name });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
