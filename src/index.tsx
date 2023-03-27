@@ -1,14 +1,36 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { App } from "./App";
+import { ThemeProvider } from "styled-components";
+import { App } from "./components/App";
 import reportWebVitals from "./reportWebVitals";
+import theme from "./theme";
+import "./styles.css";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { Pokedex } from "./screens/Home";
+import { SelectedPokemon } from "./screens/SelectedPokemon";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <App />,
+    children: [
+      { path: "/", element: <Pokedex /> },
+      {
+        path: "pokemon/:name",
+        element: <SelectedPokemon />,
+      },
+    ],
+  },
+]);
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <App />
+    <ThemeProvider theme={theme}>
+      <RouterProvider router={router} />
+    </ThemeProvider>
   </React.StrictMode>
 );
 
