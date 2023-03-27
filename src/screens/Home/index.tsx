@@ -13,7 +13,7 @@ export const Pokedex: React.FC = () => {
   const [limit, setLimit] = useState<number>(18);
 
   const navigate = useNavigate();
-  const { getPokemonDetails, fetchPokemons, pokemonList } = usePokemonsInfo();
+  const { fetchPokemons, pokemonList } = usePokemonsInfo();
 
   const handleNextButton = () => {
     if (offset === 126) setLimit(7);
