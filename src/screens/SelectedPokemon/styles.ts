@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+import { ArrowButton } from "../../components/ArrowButton";
+
 export const Wrapper = styled.div`
   height: 100%;
   width: 100%;
@@ -9,6 +11,15 @@ export const Wrapper = styled.div`
   justify-content: center;
 `;
 
+export const TopContent = styled.div`
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 10px;
+`;
+
 export const Container = styled.div`
   position: relative;
   display: flex;
@@ -16,25 +27,30 @@ export const Container = styled.div`
   align-items: center;
   width: 650px;
   height: 850px;
+  padding: 15px;
 
   border-radius: 30px;
   background-color: rgba(0, 0, 0, 0.2);
 `;
 
 export const Button = styled.button`
-  width: 90px;
+  width: fit-content;
+
   text-transform: capitalize;
   font-weight: bold;
   display: flex;
   justify-content: center;
 
-  padding: 5px;
+  padding: 5px 10px;
   margin: 0 0 10px;
 
   border: none;
   border-radius: 10px;
 
   background-color: #ff3333;
+
+  font-family: monospace;
+  font-size: large;
 
   :hover {
     cursor: pointer;
@@ -69,20 +85,18 @@ export const ButtonWrapper = styled.div`
   justify-content: center;
 `;
 
-export const DescriptionWrapper = styled.div`
+export const Description = styled.div`
   display: flex;
 
   flex-wrap: wrap;
+  gap: 15px;
+
   justify-content: center;
-`;
+  align-items: flex-start;
 
-export const Description = styled.div`
   width: 100%;
-  height: auto;
 
-  border-radius: 20px;
-  margin: 30px;
-  padding: 10px;
+  margin: 30px 0;
 `;
 
 export const Sprite = styled.img`
@@ -102,5 +116,17 @@ export const Label = styled.label`
 
   border-radius: 10px;
 
-  background-color: #ff3333;
+  background-color: #e6e6e6;
+`;
+
+export const DescriptionLabel = styled(Label)`
+  margin: 0;
+  width: auto;
+  height: fit-content;
+`;
+
+export const ExitButton = styled(ArrowButton)`
+  position: absolute;
+  top: 0;
+  left: 0;
 `;

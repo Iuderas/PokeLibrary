@@ -1,6 +1,6 @@
 export interface IArrowButton {
   backgroundColor: string;
-  disabled: boolean;
+  disabled?: boolean;
   buttonSize?: number;
   iconSize?: number;
   onClick?: () => void;

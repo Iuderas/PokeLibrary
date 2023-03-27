@@ -1,11 +1,16 @@
 import axios from "axios";
 import * as I from "./interfaces";
 import {
+  ChainLink,
+  EvolutionChain,
   NamedAPIResource,
   NamedAPIResourceList,
   Pokemon,
+  PokemonSpecies,
   PokemonSprites,
   PokemonType,
+  Type,
+  TypeRelations,
 } from "pokenode-ts";
 import { useState } from "react";
 
@@ -15,6 +20,12 @@ export const usePokemonsInfo = () => {
   const [sprite, setSprite] = useState<PokemonSprites>();
   const [id, setId] = useState<number>();
   const [type, setType] = useState<PokemonType[]>();
+  const [damageRelations, setDamageRelations] = useState<TypeRelations>();
+  const [evolutionChain, setEvolutionChain] = useState<ChainLink>();
+
+  const getPokemonEndpoint = (name: string) => {
+    return `${process.env.REACT_APP_POKE_API}/pokemon/${name}`;
+  };
 
   const fetchPokemons = async ({ limit, offset }: I.IGetPokemons) => {
     const endpoint = `${process.env.REACT_APP_POKE_API}/pokemon?limit=${limit}&offset=${offset}`;
@@ -25,9 +36,7 @@ export const usePokemonsInfo = () => {
   };
 
   const getPokemonDetails = async ({ name, url }: I.IGetPokemonsDetails) => {
-    const endpoint = url
-      ? url
-      : `${process.env.REACT_APP_POKE_API}/pokemon/${name}`;
+    const endpoint = url ? url : getPokemonEndpoint(name as string);
 
     const result = await axios.get<Pokemon>(endpoint);
 
@@ -35,27 +44,39 @@ export const usePokemonsInfo = () => {
   };
 
   const getPokemonSprites = async (name: string) => {
-    const endpoint = `${process.env.REACT_APP_POKE_API}/pokemon/${name}`;
-
-    const result = (await axios.get<Pokemon>(endpoint)).data.sprites;
+    const result = (await axios.get<Pokemon>(getPokemonEndpoint(name))).data
+      .sprites;
 
     setSprite(result);
   };
 
   const getPokemonId = async (name: string) => {
-    const endpoint = `${process.env.REACT_APP_POKE_API}/pokemon/${name}`;
-
-    const result = (await axios.get<Pokemon>(endpoint)).data.id;
+    const result = (await axios.get<Pokemon>(getPokemonEndpoint(name))).data.id;
 
     setId(result);
   };
 
   const getPokemonType = async (name: string) => {
-    const endpoint = `${process.env.REACT_APP_POKE_API}/pokemon/${name}`;
-
-    const result = (await axios.get<Pokemon>(endpoint)).data.types;
+    const result = (await axios.get<Pokemon>(getPokemonEndpoint(name))).data
+      .types;
 
     setType(result);
+  };
+
+  const getDamageRelations = async (url: string) => {
+    const result = (await axios.get<Type>(url)).data.damage_relations;
+
+    setDamageRelations(result);
+  };
+
+  const getEvolutionChain = async (url: string) => {
+    const evolutionChainUrl = (await axios.get<PokemonSpecies>(url)).data
+      .evolution_chain.url;
+
+    const result = (await axios.get<EvolutionChain>(evolutionChainUrl)).data
+      .chain;
+
+    setEvolutionChain(result);
   };
 
   return {
@@ -69,5 +90,9 @@ export const usePokemonsInfo = () => {
     getPokemonId,
     type,
     getPokemonType,
+    damageRelations,
+    getDamageRelations,
+    evolutionChain,
+    getEvolutionChain,
   };
 };
