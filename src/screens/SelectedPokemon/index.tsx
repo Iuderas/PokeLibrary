@@ -11,7 +11,7 @@ export const SelectedPokemon: React.FC = () => {
   const [description, setDescription] = useState<TDescription>();
   const [weakness, setWeakness] = useState<TTypes[]>();
   const [resistances, setResistances] = useState<TTypes[]>();
-  const [evolution, setEvolution] = useState<any>();
+  const [evolution, setEvolution] = useState<string[]>();
 
   const {
     getPokemonDetails,
@@ -31,7 +31,7 @@ export const SelectedPokemon: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    if (!currentPokemon) return;
+    if (!currentPokemon || !currentPokemon?.species.name.length) return;
     getEvolutionChain(currentPokemon?.species.url);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPokemon]);
@@ -56,6 +56,8 @@ export const SelectedPokemon: React.FC = () => {
   }, [damageRelations]);
 
   useEffect(() => {
+    if (!evolutionChain?.evolves_to[0].evolves_to.length) return;
+    console.log(evolutionChain);
     const evolutionMap = evolutionChain?.evolves_to.map(
       (item) => item.evolves_to[0].species.name
     );
